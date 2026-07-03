@@ -2,7 +2,7 @@
 
 // 1. Add two numbers
 function add(a, b) {
-//   return a + b;
+  return a + b;
 }
 
 // 2. Check if a number is even
