@@ -2,7 +2,8 @@
 
 // 1. Add two numbers
 function add(a, b) {
-
+    console.log("HI I am from Branch Nitesh1");
+    
 }
 
 // 2. Check if a number is even
