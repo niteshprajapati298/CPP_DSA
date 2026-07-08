@@ -16,7 +16,6 @@ void printS(int index , int n , vector<int>arr , vector<int>ds , int target , in
   printS(index + 1, n, arr, ds, target, s + arr[index]);
   ds.pop_back();
   printS(index+1 , n , arr , ds , target ,s);
-
 }
 int main(){
     vector<int>arr = {1 ,2, 1,1};
