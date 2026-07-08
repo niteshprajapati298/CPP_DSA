@@ -19,29 +19,49 @@ using namespace std;
 class PaymentMethod {
 public:
     virtual ~PaymentMethod() = default;
-    virtual void pay(double amount) = 0;
-    virtual void refund(double amount) = 0;
+
+    // Return type rule: derived classes must keep the same contract.
+    // Exception rule: these methods should not throw unexpectedly for normal use.
+    virtual bool pay(double amount) = 0;
+    virtual bool refund(double amount) = 0;
 };
 
 class CreditCardPayment : public PaymentMethod {
 public:
-    void pay(double amount) override {
+    bool pay(double amount) override {
         cout << "Credit card charged: " << amount << endl;
+        return true;
     }
 
-    void refund(double amount) override {
+    bool refund(double amount) override {
         cout << "Credit card refund: " << amount << endl;
+        return true;
     }
 };
 
 class PayPalPayment : public PaymentMethod {
 public:
-    void pay(double amount) override {
+    bool pay(double amount) override {
         cout << "PayPal charged: " << amount << endl;
+        return true;
     }
 
-    void refund(double amount) override {
+    bool refund(double amount) override {
         cout << "PayPal refund: " << amount << endl;
+        return true;
+    }
+};
+
+class CashPayment : public PaymentMethod {
+public:
+    bool pay(double amount) override {
+        cout << "Cash payment accepted: " << amount << endl;
+        return true;
+    }
+
+    bool refund(double amount) override {
+        cout << "Cash refund processed: " << amount << endl;
+        return true;
     }
 };
 
@@ -53,24 +73,28 @@ public:
     explicit PaymentController(PaymentMethod& method)
         : paymentMethod(method) {}
 
-    void charge(double amount) {
-        paymentMethod.pay(amount);
+    bool charge(double amount) {
+        return paymentMethod.pay(amount);
     }
 
-    void cancel(double amount) {
-        paymentMethod.refund(amount);
+    bool cancel(double amount) {
+        return paymentMethod.refund(amount);
     }
 };
 
 int main() {
     CreditCardPayment card;
     PaymentController cardController(card);
-    cardController.charge(300.0);
-    cardController.cancel(100.0);
+    cout << "Card charge success: " << cardController.charge(300.0) << endl;
+    cout << "Card refund success: " << cardController.cancel(100.0) << endl;
 
     PayPalPayment paypal;
     PaymentController paypalController(paypal);
-    paypalController.charge(250.0);
+    cout << "PayPal charge success: " << paypalController.charge(250.0) << endl;
+
+    CashPayment cash;
+    PaymentController cashController(cash);
+    cout << "Cash refund success: " << cashController.cancel(50.0) << endl;
 
     return 0;
 }
