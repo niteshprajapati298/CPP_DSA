@@ -139,16 +139,16 @@ int main() {
     // DocumentEditor editor(&doc, persistence);
     DocumentEditor *editor = new DocumentEditor(&doc, persistence);
 
-    editor.addText("Hello, World!");
-    editor.addNewLine();
-    editor.addText("This is a richer document example.");
-    editor.addTabSpace();
-    editor.addImage("image.jpg");
-    editor.addNewLine();
-    editor.addText("Saved using the persistence layer.");
+    editor->addText("Hello, World!");
+    editor->addNewLine();
+    editor->addText("This is a richer document example.");
+    editor->addTabSpace();
+    editor->addImage("image.jpg");
+    editor->addNewLine();
+    editor->addText("Saved using the persistence layer.");
 
-    cout << editor.render() << endl;
-    editor.saveDocument();
+    cout << editor->render() << endl;
+    editor->saveDocument();
 
     delete persistence;
     delete editor;
