@@ -1,0 +1,3 @@
+Hello, this is a sample document.
+[Image: photo.jpg]
+This text appears after the image.
