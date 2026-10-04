@@ -1,3 +1,0 @@
-<p>Hello, World!</p>
-<p>This is a richer document example.</p>	<img src='image.jpg' />
-<p>Saved using the persistence layer.</p>
